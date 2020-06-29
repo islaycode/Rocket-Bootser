@@ -5,6 +5,7 @@ public class Rocket : MonoBehaviour
 {
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float mainThrust = 100f;
+    [SerializeField] float levelLoadDelay = 2f;
     
     //Sounds
     [SerializeField] AudioClip mainEngine;
@@ -19,8 +20,7 @@ public class Rocket : MonoBehaviour
     //Memeber Variable
     Rigidbody rigidBody;
     AudioSource rocketAudio;
-    
-    //Enums
+
     enum State {Alive,Dying,Transcend }
     State state = State.Alive;
 
@@ -71,7 +71,7 @@ public class Rocket : MonoBehaviour
         rocketAudio.Stop();
         rocketAudio.PlayOneShot(Death);
         DeathParticle.Play();
-        Invoke("LoadFirstLevel", 1f);
+        Invoke("LoadFirstLevel", levelLoadDelay);
     }
 
     private void LoadNextLevel()
@@ -81,7 +81,7 @@ public class Rocket : MonoBehaviour
         rocketAudio.Stop();
         rocketAudio.PlayOneShot(Finish);
         FinishParticle.Play();
-        Invoke("LoadNextlevel", 1f);
+        Invoke("LoadNextlevel",levelLoadDelay);
     }
 
     private void LoadFirstLevel()
