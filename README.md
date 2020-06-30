@@ -11,3 +11,7 @@
 <li>"Space" for Thrusting (Fly)</li>
 <li>"A" for left rotation</li>
 <li>"D" for right rotation</li></ul>
+<img src="images/dark.png">
+<img src="images/crash.png">
+<img src="images/level1.png">
+<img src="images/sample.png">
