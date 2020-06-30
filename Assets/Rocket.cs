@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
@@ -21,6 +22,8 @@ public class Rocket : MonoBehaviour
     Rigidbody rigidBody;
     AudioSource rocketAudio;
 
+    bool collisionDisabled = false;
+
     enum State {Alive,Dying,Transcend }
     State state = State.Alive;
 
@@ -39,11 +42,28 @@ public class Rocket : MonoBehaviour
             Rotate();
             Thrust();
         }
-      
+        if (Debug.isDebugBuild)
+        {
+            respondToDebugKeys();
+        }
+
     }
+
+    private void respondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextlevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled;
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (state != State.Alive)
+        if (state != State.Alive || collisionDisabled)
        {
             return;
         }
@@ -59,7 +79,6 @@ public class Rocket : MonoBehaviour
 
             default:
                 RestartGame();
-
                 break;
         }
     }
@@ -91,7 +110,13 @@ public class Rocket : MonoBehaviour
 
     private void LoadNextlevel()
     {
-        SceneManager.LoadScene(1);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     private void Thrust()
