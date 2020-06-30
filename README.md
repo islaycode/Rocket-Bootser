@@ -3,7 +3,7 @@
 <h2>Tutorial</h2>
 <ul>
 <li>You have to fly your rocket and land it safely to the landing pad (Finish pad).</li>
-<li>If you crashes or bump into any obstacle in any level the game restarts from level 1.</li>
+<li>If you crashes or bump into any obstacle in any level the game restarts the same level.</li>
 <li>It's small game of 5 levels only but game increases its difficulty once you finish a level.</li>
 </ul>
 <h2> Controls</h2>
